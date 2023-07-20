@@ -246,7 +246,7 @@ namespace fastFood
                 wrapTotal = wrapPrice * Convert.ToDouble(wrapTB.Text);
                 //drink items:
                 teaTotal = teaPrice * Convert.ToDouble(teaTB.Text);
-                coffeeTotal = coffeePrice * Convert.ToDouble (coffeeTB.Text);
+                coffeeTotal = coffeePrice * Convert.ToDouble(coffeeTB.Text);
                 waterTotal = waterPrice * Convert.ToDouble(waterTB.Text);
                 cocoaTotal = cocoaPrice * Convert.ToDouble(cocoaTB.Text);
                 juiceTotal = juicePrice * Convert.ToDouble(juiceTB.Text);
@@ -254,16 +254,16 @@ namespace fastFood
                 //assuming this doesn't fail, add items to receipt:
                 //clear any past receipts:
                 receiptTB.Clear();
+                subtotal = 0;
                 tax = 0;
-                overallTotal = 0;
                 //basic receipt format/styling
                 receiptTB.AppendText(Environment.NewLine);
-                receiptTB.AppendText("\t\tSWIFTY'S RESTAURANTS LTD" + Environment.NewLine);
-                receiptTB.AppendText("\t\t*****************************"+Environment.NewLine);
+                receiptTB.AppendText("\t\tSWIFTY'S RESTAURANTS LTD\t\t" + dateLB.Text + Environment.NewLine);
+                receiptTB.AppendText("\t\t*****************************" + Environment.NewLine);
                 //add items to list
                 //there's probably a more sophisticated way of doing this, but for now, this is how the tutorial recommends
                 //(could possibly have a list of all possible items and iterate through it, but not sure if that's worth the iteration?)
-                if(friesCB.Checked == true)
+                if (friesCB.Checked == true)
                 {
                     //in future
                     //could change receipt so it reads as quantity ordered * price = total amount for that item
@@ -272,7 +272,7 @@ namespace fastFood
                     subtotal = subtotal + friesTotal;
                     subtotalPriceLB.Text = "" + subtotal;
                 }
-                if(burgerCB.Checked == true)
+                if (burgerCB.Checked == true)
                 {
                     receiptTB.AppendText("\tBurgers:\t" + burgerTotal + " Points" + Environment.NewLine);
                     subtotal = subtotal + burgerTotal;
@@ -346,12 +346,51 @@ namespace fastFood
                 taxPriceLB.Text = tax.ToString();
                 totalPriceLB.Text = overallTotal.ToString();
             }
-            catch (Exception exception) {
+            catch (Exception exception)
+            {
                 //show an alert to user if above failed
                 //(it probably failed due to invalid input)
                 MessageBox.Show("Please check all inputs are numbers");
             }
 
         }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            //reset all ordering options to unselected
+            //(and therefore, 0)
+            friesCB.Checked = false;
+            burgerCB.Checked = false;
+            saladCB.Checked = false;
+            sandwichCB.Checked = false;
+            chickenCB.Checked = false;
+            wrapCB.Checked = false;
+            //drinks:
+            teaCB.Checked = false;
+            coffeeCB.Checked = false;
+            waterCB.Checked = false;
+            cocoaCB.Checked = false;
+            juiceCB.Checked = false;
+            milkCB.Checked = false;
+
+        }
+
+        /*private void printPreviewDialog1_Load(object sender, EventArgs e)
+        {
+
+        }*/
+
+        /*private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            e.Graphics.DrawString(receiptTB.Text + " Subtotal " + subtotalPriceLB.Text + " Tax: " + "Total" + taxPriceLB.Text + totalPriceLB.Text, new Font("Century Gothic", 12, FontStyle.Regular), Brushes.Red, new Point(130));
+        }*/
+
+        /*private void printButton_Click(object sender, EventArgs e)
+        {
+            //if print accepted in preview:
+            if (printPreviewDialog1.ShowDialog() == DialogResult.OK) {
+                printDocument1.Print();
+            }
+        }*/
     }
 }

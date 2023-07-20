@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             panel1 = new Panel();
             closeLB = new Label();
             dateLB = new Label();
@@ -73,6 +74,9 @@
             taxLB = new Label();
             subtotalLB = new Label();
             receiptTB = new RichTextBox();
+            printDocument1 = new System.Drawing.Printing.PrintDocument();
+            printPreviewControl1 = new PrintPreviewControl();
+            printPreviewDialog1 = new PrintPreviewDialog();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -497,7 +501,7 @@
             // 
             // printButton
             // 
-            printButton.BackColor = Color.Gold;
+            /*printButton.BackColor = Color.Gold;
             printButton.FlatStyle = FlatStyle.Flat;
             printButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             printButton.ForeColor = Color.Red;
@@ -507,6 +511,7 @@
             printButton.TabIndex = 12;
             printButton.Text = "PRINT";
             printButton.UseVisualStyleBackColor = false;
+            printButton.Click += printButton_Click;*/
             // 
             // addButton
             // 
@@ -567,6 +572,7 @@
             resetButton.TabIndex = 7;
             resetButton.Text = "RESET";
             resetButton.UseVisualStyleBackColor = false;
+            resetButton.Click += resetButton_Click;
             // 
             // totalLB
             // 
@@ -610,11 +616,34 @@
             receiptTB.TabIndex = 6;
             receiptTB.Text = "";
             // 
+            // printDocument1
+            // 
+            //printDocument1.PrintPage += printDocument1_PrintPage;
+            // 
+            // printPreviewControl1
+            // 
+            /*printPreviewControl1.Location = new Point(0, 0);
+            printPreviewControl1.Name = "printPreviewControl1";
+            printPreviewControl1.Size = new Size(150, 150);
+            printPreviewControl1.TabIndex = 7;*/
+            // 
+            // printPreviewDialog1
+            // 
+            /*printPreviewDialog1.AutoScrollMargin = new Size(0, 0);
+            printPreviewDialog1.AutoScrollMinSize = new Size(0, 0);
+            printPreviewDialog1.ClientSize = new Size(400, 300);
+            printPreviewDialog1.Enabled = true;
+            printPreviewDialog1.Icon = (Icon)resources.GetObject("printPreviewDialog1.Icon");
+            printPreviewDialog1.Name = "printPreviewDialog1";
+            printPreviewDialog1.Visible = false;
+            printPreviewDialog1.Load += printPreviewDialog1_Load;*/
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1143, 750);
+            Controls.Add(printPreviewControl1);
             Controls.Add(receiptTB);
             Controls.Add(panel4);
             Controls.Add(panel3);
@@ -683,5 +712,8 @@
         private Button printButton;
         private Button addButton;
         private RichTextBox receiptTB;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private PrintPreviewControl printPreviewControl1;
+        private PrintPreviewDialog printPreviewDialog1;
     }
 }
