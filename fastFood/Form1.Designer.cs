@@ -30,6 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             panel1 = new Panel();
+            closeLB = new Label();
             dateLB = new Label();
             label1 = new Label();
             panel2 = new Panel();
@@ -61,14 +62,27 @@
             teaCB = new CheckBox();
             label3 = new Label();
             timer1 = new System.Windows.Forms.Timer(components);
+            panel4 = new Panel();
+            printButton = new Button();
+            addButton = new Button();
+            totalPriceLB = new Label();
+            taxPriceLB = new Label();
+            subtotalPriceLB = new Label();
+            resetButton = new Button();
+            totalLB = new Label();
+            taxLB = new Label();
+            subtotalLB = new Label();
+            receiptTB = new RichTextBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
+            panel4.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.Red;
+            panel1.Controls.Add(closeLB);
             panel1.Controls.Add(dateLB);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
@@ -77,6 +91,19 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1143, 103);
             panel1.TabIndex = 0;
+            // 
+            // closeLB
+            // 
+            closeLB.AutoSize = true;
+            closeLB.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            closeLB.ForeColor = Color.Gold;
+            closeLB.Location = new Point(1103, 0);
+            closeLB.Margin = new Padding(4, 0, 4, 0);
+            closeLB.Name = "closeLB";
+            closeLB.Size = new Size(36, 40);
+            closeLB.TabIndex = 4;
+            closeLB.Text = "X";
+            closeLB.Click += closeLB_Click;
             // 
             // dateLB
             // 
@@ -318,6 +345,7 @@
             milkCB.TabIndex = 25;
             milkCB.Text = "Milk";
             milkCB.UseVisualStyleBackColor = true;
+            milkCB.CheckedChanged += milkCB_CheckedChanged;
             // 
             // juiceTB
             // 
@@ -340,6 +368,7 @@
             juiceCB.TabIndex = 23;
             juiceCB.Text = "Juice";
             juiceCB.UseVisualStyleBackColor = true;
+            juiceCB.CheckedChanged += juiceCB_CheckedChanged;
             // 
             // cocoaTB
             // 
@@ -449,14 +478,149 @@
             // 
             timer1.Tick += timer1_Tick;
             // 
+            // panel4
+            // 
+            panel4.Controls.Add(printButton);
+            panel4.Controls.Add(addButton);
+            panel4.Controls.Add(totalPriceLB);
+            panel4.Controls.Add(taxPriceLB);
+            panel4.Controls.Add(subtotalPriceLB);
+            panel4.Controls.Add(resetButton);
+            panel4.Controls.Add(totalLB);
+            panel4.Controls.Add(taxLB);
+            panel4.Controls.Add(subtotalLB);
+            panel4.Dock = DockStyle.Bottom;
+            panel4.Location = new Point(261, 600);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(596, 150);
+            panel4.TabIndex = 5;
+            // 
+            // printButton
+            // 
+            printButton.BackColor = Color.Gold;
+            printButton.FlatStyle = FlatStyle.Flat;
+            printButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            printButton.ForeColor = Color.Red;
+            printButton.Location = new Point(425, 82);
+            printButton.Name = "printButton";
+            printButton.Size = new Size(112, 34);
+            printButton.TabIndex = 12;
+            printButton.Text = "PRINT";
+            printButton.UseVisualStyleBackColor = false;
+            // 
+            // addButton
+            // 
+            addButton.BackColor = Color.Gold;
+            addButton.FlatStyle = FlatStyle.Flat;
+            addButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            addButton.ForeColor = Color.Red;
+            addButton.Location = new Point(243, 83);
+            addButton.Name = "addButton";
+            addButton.Size = new Size(112, 34);
+            addButton.TabIndex = 11;
+            addButton.Text = "ADD";
+            addButton.UseVisualStyleBackColor = false;
+            addButton.Click += addButton_Click;
+            // 
+            // totalPriceLB
+            // 
+            totalPriceLB.AutoSize = true;
+            totalPriceLB.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            totalPriceLB.ForeColor = Color.Red;
+            totalPriceLB.Location = new Point(493, 22);
+            totalPriceLB.Name = "totalPriceLB";
+            totalPriceLB.Size = new Size(54, 25);
+            totalPriceLB.TabIndex = 10;
+            totalPriceLB.Text = "Total";
+            // 
+            // taxPriceLB
+            // 
+            taxPriceLB.AutoSize = true;
+            taxPriceLB.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            taxPriceLB.ForeColor = Color.Red;
+            taxPriceLB.Location = new Point(314, 22);
+            taxPriceLB.Name = "taxPriceLB";
+            taxPriceLB.Size = new Size(41, 25);
+            taxPriceLB.TabIndex = 9;
+            taxPriceLB.Text = "Tax";
+            // 
+            // subtotalPriceLB
+            // 
+            subtotalPriceLB.AutoSize = true;
+            subtotalPriceLB.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            subtotalPriceLB.ForeColor = Color.Red;
+            subtotalPriceLB.Location = new Point(121, 22);
+            subtotalPriceLB.Name = "subtotalPriceLB";
+            subtotalPriceLB.Size = new Size(84, 25);
+            subtotalPriceLB.TabIndex = 8;
+            subtotalPriceLB.Text = "Subtotal";
+            // 
+            // resetButton
+            // 
+            resetButton.BackColor = Color.Gold;
+            resetButton.FlatStyle = FlatStyle.Flat;
+            resetButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            resetButton.ForeColor = Color.Red;
+            resetButton.Location = new Point(60, 83);
+            resetButton.Name = "resetButton";
+            resetButton.Size = new Size(112, 34);
+            resetButton.TabIndex = 7;
+            resetButton.Text = "RESET";
+            resetButton.UseVisualStyleBackColor = false;
+            // 
+            // totalLB
+            // 
+            totalLB.AutoSize = true;
+            totalLB.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            totalLB.ForeColor = Color.Red;
+            totalLB.Location = new Point(407, 22);
+            totalLB.Name = "totalLB";
+            totalLB.Size = new Size(54, 25);
+            totalLB.TabIndex = 6;
+            totalLB.Text = "Total";
+            // 
+            // taxLB
+            // 
+            taxLB.AutoSize = true;
+            taxLB.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            taxLB.ForeColor = Color.Red;
+            taxLB.Location = new Point(250, 22);
+            taxLB.Name = "taxLB";
+            taxLB.Size = new Size(41, 25);
+            taxLB.TabIndex = 6;
+            taxLB.Text = "Tax";
+            // 
+            // subtotalLB
+            // 
+            subtotalLB.AutoSize = true;
+            subtotalLB.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            subtotalLB.ForeColor = Color.Red;
+            subtotalLB.Location = new Point(25, 22);
+            subtotalLB.Name = "subtotalLB";
+            subtotalLB.Size = new Size(84, 25);
+            subtotalLB.TabIndex = 0;
+            subtotalLB.Text = "Subtotal";
+            // 
+            // receiptTB
+            // 
+            receiptTB.BorderStyle = BorderStyle.None;
+            receiptTB.Location = new Point(307, 131);
+            receiptTB.Name = "receiptTB";
+            receiptTB.Size = new Size(511, 442);
+            receiptTB.TabIndex = 6;
+            receiptTB.Text = "";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1143, 750);
+            Controls.Add(receiptTB);
+            Controls.Add(panel4);
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(4, 5, 4, 5);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
@@ -468,6 +632,8 @@
             panel2.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -505,5 +671,17 @@
         private CheckBox teaCB;
         private System.Windows.Forms.Timer timer1;
         private Label dateLB;
+        private Label closeLB;
+        private Panel panel4;
+        private Label totalLB;
+        private Label taxLB;
+        private Label subtotalLB;
+        private Label totalPriceLB;
+        private Label taxPriceLB;
+        private Label subtotalPriceLB;
+        private Button resetButton;
+        private Button printButton;
+        private Button addButton;
+        private RichTextBox receiptTB;
     }
 }
